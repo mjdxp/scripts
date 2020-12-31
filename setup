@@ -1,0 +1,60 @@
+# mjdxp Linux Setup Script
+# Must be run as root, assumes user is named "mjd"
+
+# Update apt and packages
+echo "Updating apt..."
+apt update -y
+apt upgrade -y
+apt autoremove -y
+apt autoclean -y
+
+# Install various software without configurations via apt
+echo "Installing some software..."
+apt install -y nemo nano git curl lxappearance wget firefox
+
+# Install and configure Compton
+echo "Installing Compton and grabbing config..."
+git clone https://github.com/mjdxp/compton-cfg.git /home/mjd/.config
+
+# Install and configure AwesomeWM
+echo "Installing AwesomeWM and grabbing config..."
+apt install -y awesome
+git clone https://github.com/mjdxp/awesome-cfg.git /home/mjd/.config/awesome
+
+# Install and configure Starship
+echo "Installing Starship and grabbing config..."
+curl -fsSL https://starship.rs/install.sh | bash
+git clone https://github.com/mjdxp/starship-config.git /home/mjd/.config
+echo "Cleaning up..."
+rm -rf /home/mjd/.config/.git
+rm /home/mjd/.config/README.md
+rm /home/mjd/.config/starship.png
+
+# Install and configure Rofi
+echo "Installing Rofi and grabbing config..."
+apt install -y rofi
+git clone https://github.com/mjdxp/rofi-cfg.git /home/mjd/rofi
+
+# Install dependencies for .bashrc - pfetch
+echo "Installing pfetch..."
+mkdir /home/mjd/pftemp
+git clone https://github.com/dylanaraps/pfetch.git /home/mjd/pftemp
+cp /home/mjd/pftemp/pfetch /usr/bin/
+rm -rf /home/mjd/pftemp
+
+# Install dependencies for .bashrc - exa
+echo "Installing exa..."
+cd
+wget -O exa.deb http://mirrors.kernel.org/ubuntu/pool/universe/r/rust-exa/exa_0.9.0-4_amd64.deb
+dpkg -i exa.deb
+rm exa.deb
+
+# Get .bashrc
+echo "Grabbing .bashrc..."
+rm .bashrc
+git clone https://github.com/mjdxp/bashrc-cfg.git /home/mjd/
+echo "Cleaning up..."
+rm /home/mjd/README.md
+rm /home/mjd/sc.png
+
+echo "Done."
