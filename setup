@@ -19,6 +19,9 @@ apt install -y git
 apt install -y curl
 apt install -y lxappearance
 apt install -y wget
+apt install -y sudo
+apt install -y mousepad
+apt install -y terminator
 
 # Install and configure Compton
 echo "Installing Compton and grabbing config..."
