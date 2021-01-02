@@ -13,7 +13,12 @@ mkdir /home/mjd/temp/
 
 # Install various software without configurations via apt
 echo "Installing some software..."
-apt install nemo nano git curl lxappearance wget firefox
+apt install -y nemo
+apt install -y nano
+apt install -y git
+apt install -y curl
+apt install -y lxappearance
+apt install -y wget
 
 # Install and configure Compton
 echo "Installing Compton and grabbing config..."
